@@ -1,3 +1,10 @@
+import { Header } from "@/shared/components";
+
 export default function MainPage() {
-	return <main>MainPage</main>;
+	return (
+		<>
+			<Header />
+			<main>MainPage</main>
+		</>
+	);
 }
