@@ -17,7 +17,7 @@
 	color: white;
 	font-weight: 600;
 
-	background-color: #db0019;
+	background-color: var(--red-primary-color);
 	max-height: 56px;
 
 	padding: 16px 32px;

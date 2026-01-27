@@ -1,4 +1,5 @@
 export { Button } from "./Button/Button";
+export { ErrorMessage } from "./ErrorMessage/ErrorMessage";
 export { Header } from "./Header/Header";
 export {
 	CarIcon,
@@ -9,5 +10,5 @@ export {
 	TimeIcon,
 	UserIcon,
 } from "./Icon/icons";
-
+export { Loading } from "./Loading/Loading";
 export { Typography } from "./Typography/Typography";

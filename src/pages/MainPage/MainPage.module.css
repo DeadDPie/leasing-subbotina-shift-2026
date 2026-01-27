@@ -1,0 +1,10 @@
+.cards_list {
+	max-width: 960px;
+	width: 100%;
+	display: grid;
+	margin: 0 auto;
+	align-items: center;
+	grid-template-columns: 1fr 1fr 1fr;
+	column-gap: 32px;
+	row-gap: 48px;
+}
