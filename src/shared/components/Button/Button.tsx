@@ -8,12 +8,12 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	children: React.ReactNode;
 }
 
-export const Button: React.FC<ButtonProps> = ({
+export const Button = ({
 	variant = "primary",
 	children,
 	className,
 	...props
-}) => {
+}: ButtonProps) => {
 	return (
 		<button
 			type="button"
