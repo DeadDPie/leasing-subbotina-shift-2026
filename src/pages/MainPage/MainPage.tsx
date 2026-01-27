@@ -3,9 +3,9 @@ import { useSearchParams } from "react-router-dom";
 import { useGetCarsQuery } from "@/shared/api/carsApi";
 import { ErrorMessage, Header, Loading } from "@/shared/components";
 import { CarCard } from "./components/CarCard/CarCard";
-import styles from "./MainPage.module.css";
 import { CarFilters } from "./components/CarFilters/CarFilters";
 import { SearchPanel } from "./components/SearchPanel/SearchPanel";
+import styles from "./MainPage.module.css";
 
 export default function MainPage() {
 	const [filtersOpen, setFiltersOpen] = useState(false);
@@ -13,6 +13,7 @@ export default function MainPage() {
 
 	const query = {
 		search: searchParams.get("search") || undefined,
+		maxPrice: searchParams.get("maxPrice") || undefined,
 	};
 	const { data, isLoading, error } = useGetCarsQuery(query);
 
@@ -31,7 +32,7 @@ export default function MainPage() {
 			<Header />
 			<main>
 				<SearchPanel
-					onFiltersClick={() => setFiltersOpen(true)}
+					onFiltersClick={() => setFiltersOpen((prev) => !prev)}
 					search={query.search || ""}
 					onSearchChange={(value) => {
 						searchParams.set("search", value);

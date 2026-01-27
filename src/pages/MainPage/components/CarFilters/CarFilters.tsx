@@ -23,7 +23,9 @@ export const CarFilters = ({ onClose }: CarFiltersProps) => {
 				<Button variant="outline" onClick={handleResetFilters}>
 					Сбросить все фильтры
 				</Button>
-				<Button variant="primary">Показать</Button>
+				<Button variant="primary" onClick={onClose}>
+					Показать
+				</Button>
 			</div>
 		</section>
 	);
