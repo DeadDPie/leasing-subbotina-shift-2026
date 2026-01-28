@@ -31,19 +31,16 @@ export default function MainPage() {
 		return <ErrorMessage message={getErrorMessage(getCarsQuery.error)} />;
 
 	return (
-		<>
-			<Header />
-			<main>
-				<SearchPanel onFiltersClick={() => setFiltersOpen((prev) => !prev)} />
+		<main>
+			<SearchPanel onFiltersClick={() => setFiltersOpen((prev) => !prev)} />
 
-				{filtersOpen && <CarFilters onClose={() => setFiltersOpen(false)} />}
+			{filtersOpen && <CarFilters onClose={() => setFiltersOpen(false)} />}
 
-				<section className={styles.cards_list}>
-					{getCarsQuery.data?.data.map((car) => (
-						<CarCard key={car.id} car={car} />
-					))}
-				</section>
-			</main>
-		</>
+			<section className={styles.cards_list}>
+				{getCarsQuery.data?.data.map((car) => (
+					<CarCard key={car.id} car={car} />
+				))}
+			</section>
+		</main>
 	);
 }

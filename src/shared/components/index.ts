@@ -10,5 +10,6 @@ export {
 	TimeIcon,
 	UserIcon,
 } from "./icons";
+export { Layout } from "./Layout/Layout";
 export { Loading } from "./Loading/Loading";
 export { Typography } from "./Typography/Typography";
