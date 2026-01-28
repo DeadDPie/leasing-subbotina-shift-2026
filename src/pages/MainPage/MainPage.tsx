@@ -5,6 +5,7 @@ import { ErrorMessage, Header, Loading } from "@/shared/components";
 import { CarCard } from "./components/CarCard/CarCard";
 import { CarFilters } from "./components/CarFilters/CarFilters";
 import { SearchPanel } from "./components/SearchPanel/SearchPanel";
+import { getErrorMessage } from "./consts/getErrorMessage";
 import styles from "./MainPage.module.css";
 
 export default function MainPage() {
@@ -26,14 +27,8 @@ export default function MainPage() {
 
 	if (getCarsQuery.isLoading) return <Loading />;
 
-	if (getCarsQuery.error) {
-		const message =
-			"data" in (getCarsQuery.error as any) &&
-			(getCarsQuery.error as any).data?.message
-				? (getCarsQuery.error as any).data.message
-				: "Произошла ошибка";
-		return <ErrorMessage message={message} />;
-	}
+	if (getCarsQuery.error)
+		return <ErrorMessage message={getErrorMessage(getCarsQuery.error)} />;
 
 	return (
 		<>
