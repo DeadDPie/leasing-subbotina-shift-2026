@@ -1,3 +1,6 @@
+import { useParams } from "react-router-dom";
+
 export default function CarPage() {
-	return <main>CarPage</main>;
+	const { carId } = useParams<{ carId: string }>();
+	return <>CarPage {carId}</>;
 }

@@ -1,6 +1,7 @@
 import { Button, Typography } from "@shared/components";
 import { API_URL } from "@shared/constants/url";
 import type { Car } from "@shared/types/car";
+import { useNavigate } from "react-router-dom";
 import styles from "./CarCard.module.css";
 
 interface CarCardProps {
@@ -9,6 +10,8 @@ interface CarCardProps {
 const DEFAULT_DAYS_RENT = 14;
 
 export const CarCard = ({ car }: CarCardProps) => {
+	const navigate = useNavigate();
+
 	const cover = car.media.find((m) => m.isCover);
 	const defaultSrc = cover ? `${API_URL}${cover.url}` : "/placeholder-car.png";
 
@@ -30,7 +33,9 @@ export const CarCard = ({ car }: CarCardProps) => {
 					{car.price * DEFAULT_DAYS_RENT} ₽ за {DEFAULT_DAYS_RENT} дней
 				</Typography>
 			</div>
-			<Button variant="primary">Выбрать</Button>
+			<Button variant="primary" onClick={() => navigate(`/car/${car.id}`)}>
+				Выбрать
+			</Button>
 		</article>
 	);
 };

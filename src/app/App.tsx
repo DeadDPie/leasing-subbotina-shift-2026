@@ -1,9 +1,12 @@
+import { Layout } from "@/shared/components";
 import { AppRouter } from "@/shared/providers";
 
 const App = () => {
 	return (
 		<div className="app">
-			<AppRouter />
+			<Layout>
+				<AppRouter />
+			</Layout>
 		</div>
 	);
 };
