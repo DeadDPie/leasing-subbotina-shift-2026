@@ -2,27 +2,33 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 import { ru } from "date-fns/locale/ru";
+import { useEffect, useState } from "react";
 import { registerLocale } from "react-datepicker";
-
-registerLocale("ru", ru);
-
-import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Button, SlidersIcon, Typography } from "@/shared/components";
 import styles from "./SearchPanel.module.css";
 
-interface SearchPanelProps {
-	search: string;
-	onSearchChange: (value: string) => void;
-	onFiltersClick: () => void;
-}
+registerLocale("ru", ru);
 
 export const SearchPanel = ({
-	search,
-	onSearchChange,
 	onFiltersClick,
-}: SearchPanelProps) => {
+}: {
+	onFiltersClick: () => void;
+}) => {
+	const [searchParams, setSearchParams] = useSearchParams();
+
+	const [search, setSearch] = useState(searchParams.get("search") || "");
 	const [startDate, setStartDate] = useState<Date | null>(null);
 	const [endDate, setEndDate] = useState<Date | null>(null);
+
+	useEffect(() => {
+		if (search) {
+			searchParams.set("search", search);
+		} else {
+			searchParams.delete("search");
+		}
+		setSearchParams(searchParams);
+	}, [search, searchParams, setSearchParams]);
 
 	const handleDateChange = ([start, end]: [Date | null, Date | null]) => {
 		setStartDate(start);
@@ -35,16 +41,16 @@ export const SearchPanel = ({
 				<label htmlFor="search_input">
 					<Typography variant="label">Поиск</Typography>
 				</label>
-
 				<input
 					id="search_input"
 					type="text"
 					value={search}
-					onChange={(e) => onSearchChange(e.target.value)}
+					onChange={(e) => setSearch(e.target.value)}
 					placeholder="Поиск"
 					className={styles.input}
 				/>
 			</div>
+
 			<div className={styles.datepickerWrapper}>
 				<DatePicker
 					selectsRange
@@ -59,6 +65,7 @@ export const SearchPanel = ({
 					dayClassName={() => styles.day}
 				/>
 			</div>
+
 			<Button variant="secondary" onClick={onFiltersClick}>
 				<SlidersIcon /> Фильтры
 			</Button>

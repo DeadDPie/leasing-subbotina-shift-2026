@@ -9,12 +9,19 @@ import styles from "./MainPage.module.css";
 
 export default function MainPage() {
 	const [filtersOpen, setFiltersOpen] = useState(false);
-	const [searchParams, setSearchParams] = useSearchParams();
+	const [searchParams] = useSearchParams();
 
 	const query = {
 		search: searchParams.get("search") || undefined,
 		maxPrice: searchParams.get("maxPrice") || undefined,
+		minPrice: searchParams.get("minPrice") || undefined,
+		transmission: searchParams.get("transmission") || undefined,
+		steering: searchParams.get("steering") || undefined,
+		bodyType: searchParams.get("bodyType") || undefined,
+		brand: searchParams.get("brand") || undefined,
+		color: searchParams.get("color") || undefined,
 	};
+
 	const { data, isLoading, error } = useGetCarsQuery(query);
 
 	if (isLoading) return <Loading />;
@@ -23,7 +30,6 @@ export default function MainPage() {
 			"data" in (error as any) && (error as any).data?.message
 				? (error as any).data.message
 				: "Произошла ошибка";
-
 		return <ErrorMessage message={message} />;
 	}
 
@@ -31,15 +37,10 @@ export default function MainPage() {
 		<>
 			<Header />
 			<main>
-				<SearchPanel
-					onFiltersClick={() => setFiltersOpen((prev) => !prev)}
-					search={query.search || ""}
-					onSearchChange={(value) => {
-						searchParams.set("search", value);
-						setSearchParams(searchParams);
-					}}
-				/>
+				<SearchPanel onFiltersClick={() => setFiltersOpen((prev) => !prev)} />
+
 				{filtersOpen && <CarFilters onClose={() => setFiltersOpen(false)} />}
+
 				<section className={styles.cards_list}>
 					{data?.data.map((car) => (
 						<CarCard key={car.id} car={car} />

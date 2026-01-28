@@ -2,42 +2,85 @@ import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import styles from "./Slider.module.css";
 
-const MIN = 0;
-const MAX = 10000;
+const MIN_PRICE = 0;
+const MAX_PRICE = 10000;
 
 export const Slider = () => {
 	const [searchParams, setSearchParams] = useSearchParams();
 
-	const [price, setPrice] = useState(() => {
-		const param = searchParams.get("maxPrice");
-		return param ? Number(param) : 3000;
+	const [minPrice, setMinPrice] = useState(() => {
+		const value = searchParams.get("minPrice");
+		return value ? Number(value) : MIN_PRICE;
 	});
 
-	const progress = ((price - MIN) / (MAX - MIN)) * 100;
+	const [maxPrice, setMaxPrice] = useState(() => {
+		const value = searchParams.get("maxPrice");
+		return value ? Number(value) : MAX_PRICE;
+	});
 
-	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const value = Number(event.target.value);
-		setPrice(value);
+	const updateParams = (min: number, max: number) => {
+		const params = new URLSearchParams(searchParams);
 
-		const newParams = new URLSearchParams(searchParams);
-		newParams.set("maxPrice", String(value));
-		setSearchParams(newParams);
+		min === MIN_PRICE
+			? params.delete("minPrice")
+			: params.set("minPrice", String(min));
+		max === MAX_PRICE
+			? params.delete("maxPrice")
+			: params.set("maxPrice", String(max));
+
+		setSearchParams(params);
 	};
+
+	const handleMinChange = (value: number) => {
+		const newMin = Math.min(value, maxPrice - 1);
+		setMinPrice(newMin);
+		updateParams(newMin, maxPrice);
+	};
+
+	const handleMaxChange = (value: number) => {
+		const newMax = Math.max(value, minPrice + 1);
+		setMaxPrice(newMax);
+		updateParams(minPrice, newMax);
+	};
+
+	const progressLeft = ((minPrice - MIN_PRICE) / (MAX_PRICE - MIN_PRICE)) * 100;
+	const progressWidth = ((maxPrice - minPrice) / (MAX_PRICE - MIN_PRICE)) * 100;
 
 	return (
 		<div className={styles.container}>
-			<input
-				type="range"
-				min={MIN}
-				max={MAX}
-				value={price}
-				onChange={handleChange}
-				className={styles.slider}
-				style={{ "--progress-width": `${progress}%` } as React.CSSProperties}
-			/>
+			<div className={styles.range}>
+				<div className={styles.track} />
+
+				<div
+					className={styles.progress}
+					style={{
+						left: `${progressLeft}%`,
+						width: `${progressWidth}%`,
+					}}
+				/>
+
+				<input
+					type="range"
+					min={MIN_PRICE}
+					max={MAX_PRICE}
+					value={minPrice}
+					onChange={(e) => handleMinChange(Number(e.target.value))}
+					className={`${styles.slider} ${styles.thumbLeft}`}
+				/>
+
+				<input
+					type="range"
+					min={MIN_PRICE}
+					max={MAX_PRICE}
+					value={maxPrice}
+					onChange={(e) => handleMaxChange(Number(e.target.value))}
+					className={`${styles.slider} ${styles.thumbRight}`}
+				/>
+			</div>
+
 			<div className={styles.limits}>
-				<span>{price.toLocaleString()} ₽</span>
-				<span>до {MAX.toLocaleString()} ₽</span>
+				<span>от {minPrice} ₽</span>
+				<span>до {maxPrice} ₽</span>
 			</div>
 		</div>
 	);
