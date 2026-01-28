@@ -1,7 +1,14 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useGetCarsQuery } from "@/shared/api/carsApi";
+import { type GetCarsParams, useGetCarsQuery } from "@/shared/api/carsApi";
 import { ErrorMessage, Loading } from "@/shared/components";
+import type {
+	BodyType,
+	Brand,
+	CarColor,
+	Steering,
+	Transmission,
+} from "@/shared/types/car";
 import { CarCard } from "./components/CarCard/CarCard";
 import { CarFilters } from "./components/CarFilters/CarFilters";
 import { SearchPanel } from "./components/SearchPanel/SearchPanel";
@@ -12,15 +19,19 @@ export default function MainPage() {
 	const [filtersOpen, setFiltersOpen] = useState(false);
 	const [searchParams] = useSearchParams();
 
-	const query = {
-		search: searchParams.get("search") || undefined,
-		maxPrice: searchParams.get("maxPrice") || undefined,
-		minPrice: searchParams.get("minPrice") || undefined,
-		transmission: searchParams.get("transmission") || undefined,
-		steering: searchParams.get("steering") || undefined,
-		bodyType: searchParams.get("bodyType") || undefined,
-		brand: searchParams.get("brand") || undefined,
-		color: searchParams.get("color") || undefined,
+	const query: GetCarsParams = {
+		search: searchParams.get("search") ?? undefined,
+		maxPrice: searchParams.get("maxPrice")
+			? Number(searchParams.get("maxPrice"))
+			: undefined,
+		minPrice: searchParams.get("minPrice")
+			? Number(searchParams.get("minPrice"))
+			: undefined,
+		transmission: searchParams.get("transmission") as Transmission | undefined,
+		steering: searchParams.get("steering") as Steering | undefined,
+		bodyType: searchParams.get("bodyType") as BodyType | undefined,
+		brand: searchParams.get("brand") as Brand | undefined,
+		color: searchParams.get("color") as CarColor | undefined,
 	};
 
 	const getCarsQuery = useGetCarsQuery(query);
