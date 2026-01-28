@@ -1,0 +1,6 @@
+.error {
+	padding: 20px;
+	text-align: center;
+	font-weight: 500;
+	color: var(--red-primary-color);
+}

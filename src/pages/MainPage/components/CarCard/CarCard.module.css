@@ -1,0 +1,17 @@
+.card {
+	max-width: 298px;
+	width: 100%;
+}
+.image {
+	border-radius: 16px;
+	margin-bottom: 24px;
+	max-width: 298px;
+	height: 220px;
+	object-fit: contain;
+}
+
+.wrapper {
+	display: flex;
+	justify-content: space-between;
+	margin: 32px 0 24px 0;
+}
