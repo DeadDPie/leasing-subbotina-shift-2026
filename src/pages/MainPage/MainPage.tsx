@@ -22,13 +22,15 @@ export default function MainPage() {
 		color: searchParams.get("color") || undefined,
 	};
 
-	const { data, isLoading, error } = useGetCarsQuery(query);
+	const getCarsQuery = useGetCarsQuery(query);
 
-	if (isLoading) return <Loading />;
-	if (error) {
+	if (getCarsQuery.isLoading) return <Loading />;
+
+	if (getCarsQuery.error) {
 		const message =
-			"data" in (error as any) && (error as any).data?.message
-				? (error as any).data.message
+			"data" in (getCarsQuery.error as any) &&
+			(getCarsQuery.error as any).data?.message
+				? (getCarsQuery.error as any).data.message
 				: "Произошла ошибка";
 		return <ErrorMessage message={message} />;
 	}
@@ -42,7 +44,7 @@ export default function MainPage() {
 				{filtersOpen && <CarFilters onClose={() => setFiltersOpen(false)} />}
 
 				<section className={styles.cards_list}>
-					{data?.data.map((car) => (
+					{getCarsQuery.data?.data.map((car) => (
 						<CarCard key={car.id} car={car} />
 					))}
 				</section>

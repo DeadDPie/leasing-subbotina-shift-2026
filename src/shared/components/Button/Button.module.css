@@ -25,7 +25,7 @@
 }
 
 .primary:hover {
-	background-color: #aa0014;
+	background-color: var(--red-secondary-color);
 }
 
 .ghost {
@@ -36,7 +36,7 @@
 }
 
 .ghost:hover {
-	color: #aa0014;
+	color: var(--red-secondary-color);
 }
 
 .outline {

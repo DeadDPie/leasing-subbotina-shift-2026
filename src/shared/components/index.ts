@@ -9,6 +9,6 @@ export {
 	SlidersIcon,
 	TimeIcon,
 	UserIcon,
-} from "./Icon/icons";
+} from "./icons";
 export { Loading } from "./Loading/Loading";
 export { Typography } from "./Typography/Typography";

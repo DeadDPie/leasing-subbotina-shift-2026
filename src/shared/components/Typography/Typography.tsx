@@ -1,14 +1,14 @@
 import classNames from "classnames";
 import styles from "./Typography.module.css";
 
-export type TypographyVariant =
+type TypographyVariant =
 	| "body16"
 	| "title20"
 	| "body16Medium"
 	| "body16Ghost"
 	| "label";
 
-export type TypographyTag =
+type TypographyTag =
 	| "h1"
 	| "h2"
 	| "h3"
@@ -33,13 +33,13 @@ const variantClasses: Record<TypographyVariant, string> = {
 	label: styles.typography_label,
 };
 
-export const Typography: React.FC<TypographyProps> = ({
+export const Typography = ({
 	variant = "body16",
 	as: Component = "p",
 	children,
 	className,
 	...props
-}) => (
+}: TypographyProps) => (
 	<Component
 		className={classNames(
 			styles.typography,
