@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useGetCarsQuery } from "@/shared/api/carsApi";
-import { ErrorMessage, Header, Loading } from "@/shared/components";
+import { ErrorMessage, Loading } from "@/shared/components";
 import { CarCard } from "./components/CarCard/CarCard";
 import { CarFilters } from "./components/CarFilters/CarFilters";
 import { SearchPanel } from "./components/SearchPanel/SearchPanel";
@@ -31,7 +31,7 @@ export default function MainPage() {
 		return <ErrorMessage message={getErrorMessage(getCarsQuery.error)} />;
 
 	return (
-		<main>
+		<>
 			<SearchPanel onFiltersClick={() => setFiltersOpen((prev) => !prev)} />
 
 			{filtersOpen && <CarFilters onClose={() => setFiltersOpen(false)} />}
@@ -41,6 +41,6 @@ export default function MainPage() {
 					<CarCard key={car.id} car={car} />
 				))}
 			</section>
-		</main>
+		</>
 	);
 }
