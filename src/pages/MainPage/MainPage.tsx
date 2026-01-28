@@ -9,10 +9,10 @@ import type {
 	Steering,
 	Transmission,
 } from "@/shared/types/car";
+import { getErrorMessage } from "../../shared/helpers/getErrorMessage";
 import { CarCard } from "./components/CarCard/CarCard";
 import { CarFilters } from "./components/CarFilters/CarFilters";
 import { SearchPanel } from "./components/SearchPanel/SearchPanel";
-import { getErrorMessage } from "./consts/getErrorMessage";
 import styles from "./MainPage.module.css";
 
 export default function MainPage() {
@@ -27,11 +27,12 @@ export default function MainPage() {
 		minPrice: searchParams.get("minPrice")
 			? Number(searchParams.get("minPrice"))
 			: undefined,
-		transmission: searchParams.get("transmission") as Transmission | undefined,
-		steering: searchParams.get("steering") as Steering | undefined,
-		bodyType: searchParams.get("bodyType") as BodyType | undefined,
-		brand: searchParams.get("brand") as Brand | undefined,
-		color: searchParams.get("color") as CarColor | undefined,
+		transmission:
+			(searchParams.get("transmission") as Transmission) || undefined,
+		steering: (searchParams.get("steering") as Steering) || undefined,
+		bodyType: (searchParams.get("bodyType") as BodyType) || undefined,
+		brand: (searchParams.get("brand") as Brand) || undefined,
+		color: (searchParams.get("color") as CarColor) || undefined,
 	};
 
 	const getCarsQuery = useGetCarsQuery(query);
