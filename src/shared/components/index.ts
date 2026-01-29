@@ -1,4 +1,5 @@
 export { Button } from "./Button/Button";
+export { DateRangePicker } from "./DateRangePicker/DateRangePicker";
 export { ErrorMessage } from "./ErrorMessage/ErrorMessage";
 export { Header } from "./Header/Header";
 export {
