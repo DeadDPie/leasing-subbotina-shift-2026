@@ -1,5 +1,5 @@
 import { skipToken } from "@reduxjs/toolkit/query";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetCarQuery } from "@/shared/api/carsApi";
 import { Button, ErrorMessage, Loading, Typography } from "@/shared/components";
 import { getLabelFromOptions } from "@/shared/helpers/getLabelFromOptions";
@@ -13,6 +13,8 @@ import styles from "./CarPage.module.css";
 import { CarGallery } from "./components/CarGallery";
 
 export default function CarPage() {
+	const navigate = useNavigate();
+
 	const { carId } = useParams<{ carId: string }>();
 
 	const getCarQuery = useGetCarQuery(carId ? { carId } : skipToken);
@@ -112,7 +114,12 @@ export default function CarPage() {
 					<dl className={styles.wrapper}>
 						<Button variant="outline">Назад</Button>
 
-						<Button variant="primary">Забронировать</Button>
+						<Button
+							variant="primary"
+							onClick={() => navigate(`/car/${car.id}/rent`)}
+						>
+							Забронировать
+						</Button>
 					</dl>
 				</section>
 			</div>
