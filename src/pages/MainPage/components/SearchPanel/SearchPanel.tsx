@@ -1,11 +1,15 @@
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 import { ru } from "date-fns/locale/ru";
 import { useEffect, useState } from "react";
 import { registerLocale } from "react-datepicker";
 import { useSearchParams } from "react-router-dom";
-import { Button, SlidersIcon, Typography } from "@/shared/components";
+import {
+	Button,
+	DateRangePicker,
+	SlidersIcon,
+	Typography,
+} from "@/shared/components";
 import styles from "./SearchPanel.module.css";
 
 registerLocale("ru", ru);
@@ -18,8 +22,6 @@ export const SearchPanel = ({
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	const [search, setSearch] = useState(searchParams.get("search") || "");
-	const [startDate, setStartDate] = useState<Date | null>(null);
-	const [endDate, setEndDate] = useState<Date | null>(null);
 
 	useEffect(() => {
 		if (search) {
@@ -29,11 +31,6 @@ export const SearchPanel = ({
 		}
 		setSearchParams(searchParams);
 	}, [search, searchParams, setSearchParams]);
-
-	const handleDateChange = ([start, end]: [Date | null, Date | null]) => {
-		setStartDate(start);
-		setEndDate(end);
-	};
 
 	return (
 		<section className={styles.panel}>
@@ -51,20 +48,7 @@ export const SearchPanel = ({
 				/>
 			</div>
 
-			<div className={styles.datepickerWrapper}>
-				<DatePicker
-					selectsRange
-					locale="ru"
-					startDate={startDate}
-					endDate={endDate}
-					onChange={handleDateChange}
-					dateFormat="dd.MM.yyyy"
-					placeholderText="Дата аренды"
-					className={styles.input}
-					calendarClassName={styles.calendar}
-					dayClassName={() => styles.day}
-				/>
-			</div>
+			<DateRangePicker />
 
 			<Button variant="secondary" onClick={onFiltersClick}>
 				<SlidersIcon /> Фильтры

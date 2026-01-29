@@ -1,0 +1,23 @@
+.gallery {
+	max-width: 500px;
+	width: 100%;
+}
+
+.cover {
+	max-width: 500px;
+	max-height: 294px;
+	border-radius: 16px;
+}
+
+.thumbnail {
+	max-width: 156px;
+	border-radius: 8px;
+	max-height: 94px;
+}
+
+.thumbnails_list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16px;
+	margin-top: 16px;
+}

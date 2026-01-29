@@ -1,11 +1,11 @@
 import { Button, Typography } from "@shared/components";
 import { API_URL } from "@shared/constants/url";
-import type { Car } from "@shared/types/car";
+import type { BaseCar } from "@shared/types/car";
 import { useNavigate } from "react-router-dom";
 import styles from "./CarCard.module.css";
 
 interface CarCardProps {
-	car: Car;
+	car: BaseCar;
 }
 const DEFAULT_DAYS_RENT = 14;
 
