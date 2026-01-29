@@ -2,8 +2,13 @@ import { skipToken } from "@reduxjs/toolkit/query";
 import { useParams } from "react-router-dom";
 import { useGetCarQuery } from "@/shared/api/carsApi";
 import { Button, ErrorMessage, Loading, Typography } from "@/shared/components";
+import { getLabelFromOptions } from "@/shared/helpers/getLabelFromOptions";
 import type { CarWithRents } from "@/shared/types/car";
 import { getErrorMessage } from "../../shared/helpers/getErrorMessage";
+import {
+	steeringOptions,
+	transmissionOptions,
+} from "../MainPage/components/SegmentControls/consts/consts";
 import styles from "./CarPage.module.css";
 import { CarGallery } from "./components/CarGallery";
 
@@ -17,6 +22,15 @@ export default function CarPage() {
 
 	if (getCarQuery.error)
 		return <ErrorMessage message={getErrorMessage(getCarQuery.error)} />;
+
+	if (!car) return null;
+
+	const transmissionLabel = getLabelFromOptions(
+		transmissionOptions,
+		car.transmission,
+	);
+
+	const steeringLabel = getLabelFromOptions(steeringOptions, car.steering);
 
 	return (
 		<div className={styles.page}>
@@ -38,7 +52,7 @@ export default function CarPage() {
 									Коробка передач
 								</Typography>
 								<Typography as="dd" variant="body16">
-									{car.transmission}
+									{transmissionLabel}
 								</Typography>
 							</div>
 
@@ -47,7 +61,7 @@ export default function CarPage() {
 									Руль
 								</Typography>
 								<Typography as="dd" variant="body16">
-									{car.steering}
+									{steeringLabel}
 								</Typography>
 							</div>
 
