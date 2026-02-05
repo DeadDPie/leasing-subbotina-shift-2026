@@ -17,7 +17,9 @@ type TypographyTag =
 	| "h6"
 	| "p"
 	| "span"
-	| "div";
+	| "div"
+	| "dd"
+	| "dt";
 
 interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
 	variant?: TypographyVariant;

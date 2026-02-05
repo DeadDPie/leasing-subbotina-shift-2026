@@ -1,20 +1,8 @@
-.panel {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: end;
-	gap: 16px;
-	width: 100%;
-	max-width: 960px;
-	background-color: var(--background-paper);
-	border-radius: 16px;
-	padding: 16px 24px 24px 24px;
-	margin: 48px auto;
-}
-
-.wrapper {
+.form {
 	display: flex;
 	flex-direction: column;
+	gap: 24px;
+	max-width: 368px;
 }
 
 .input {
@@ -22,7 +10,7 @@
 	border-radius: 8px;
 	padding: 12px;
 	height: 48px;
-	width: 345px;
+	width: 100%;
 	border: 1px solid var(--secondary-paper);
 	font-size: 16px;
 	font-weight: 400;
