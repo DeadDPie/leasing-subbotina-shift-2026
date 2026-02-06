@@ -1,7 +1,4 @@
-import type { RouteProps } from "react-router-dom";
-import CarPage from "@/pages/CarPage/CarPage";
-import MainPage from "@/pages/MainPage/MainPage";
-import RentPage from "@/pages/RentPage/RentPage";
+import { generatePath } from "react-router-dom";
 
 export enum AppRoutes {
 	MAIN = "main",
@@ -15,17 +12,26 @@ export const RoutePath: Record<AppRoutes, string> = {
 	[AppRoutes.RENT]: "/car/:carId/rent",
 };
 
-export const ROUTES: Record<AppRoutes, RouteProps> = {
+type RouteConfig = {
+	path: string;
+	to: (...args: any[]) => string;
+};
+
+export const ROUTES: Record<AppRoutes, RouteConfig> = {
 	[AppRoutes.MAIN]: {
 		path: RoutePath[AppRoutes.MAIN],
-		element: <MainPage />,
+		to: () => RoutePath[AppRoutes.MAIN],
 	},
+
 	[AppRoutes.CAR]: {
 		path: RoutePath[AppRoutes.CAR],
-		element: <CarPage />,
+		to: (carId: string | number) =>
+			generatePath(RoutePath[AppRoutes.CAR], { carId }),
 	},
+
 	[AppRoutes.RENT]: {
 		path: RoutePath[AppRoutes.RENT],
-		element: <RentPage />,
+		to: (carId: string | number) =>
+			generatePath(RoutePath[AppRoutes.RENT], { carId }),
 	},
 };

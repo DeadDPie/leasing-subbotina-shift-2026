@@ -1,5 +1,5 @@
 import { Layout } from "@/shared/components";
-import { AppRouter } from "@/shared/providers";
+import { AppRouter } from "./AppRouter";
 
 const App = () => {
 	return (

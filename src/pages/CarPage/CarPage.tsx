@@ -2,6 +2,7 @@ import { skipToken } from "@reduxjs/toolkit/query";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetCarQuery } from "@/shared/api/carsApi";
 import { Button, ErrorMessage, Loading, Typography } from "@/shared/components";
+import { AppRoutes, ROUTES } from "@/shared/constants/router";
 import { getLabelFromOptions } from "@/shared/helpers/getLabelFromOptions";
 import type { CarWithRents } from "@/shared/types/car";
 import { getErrorMessage } from "../../shared/helpers/getErrorMessage";
@@ -116,7 +117,7 @@ export default function CarPage() {
 
 						<Button
 							variant="primary"
-							onClick={() => navigate(`/car/${car.id}/rent`)}
+							onClick={() => navigate(ROUTES[AppRoutes.RENT].to(carId))}
 						>
 							Забронировать
 						</Button>

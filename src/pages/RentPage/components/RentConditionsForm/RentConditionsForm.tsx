@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FilterField } from "@/pages/MainPage/components/FilterField/FilterField";
 import { Button, DateRangePicker } from "@/shared/components";
+import { AppRoutes, ROUTES } from "@/shared/constants/router";
 import { useRent } from "../../contexts/RentContext";
 import styles from "./RentConditionsForm.module.css";
 
@@ -51,7 +52,10 @@ export const RentConditionsForm = () => {
 				/>
 			</FilterField>
 			<div className={styles.wrapper}>
-				<Button variant="outline" onClick={() => navigate(`/car/${carId}`)}>
+				<Button
+					variant="outline"
+					onClick={() => navigate(ROUTES[AppRoutes.CAR].to(carId))}
+				>
 					Назад
 				</Button>
 

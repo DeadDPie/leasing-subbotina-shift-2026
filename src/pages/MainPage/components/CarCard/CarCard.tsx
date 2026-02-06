@@ -2,6 +2,7 @@ import { Button, Typography } from "@shared/components";
 import { API_URL } from "@shared/constants/url";
 import type { BaseCar } from "@shared/types/car";
 import { useNavigate } from "react-router-dom";
+import { AppRoutes, ROUTES } from "@/shared/constants/router";
 import styles from "./CarCard.module.css";
 
 interface CarCardProps {
@@ -33,7 +34,10 @@ export const CarCard = ({ car }: CarCardProps) => {
 					{car.price * DEFAULT_DAYS_RENT} ₽ за {DEFAULT_DAYS_RENT} дней
 				</Typography>
 			</div>
-			<Button variant="primary" onClick={() => navigate(`/car/${car.id}`)}>
+			<Button
+				variant="primary"
+				onClick={() => navigate(ROUTES[AppRoutes.CAR].to(car.id))}
+			>
 				Выбрать
 			</Button>
 		</article>
