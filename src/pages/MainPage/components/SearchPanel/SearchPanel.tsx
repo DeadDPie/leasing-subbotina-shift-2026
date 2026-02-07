@@ -1,8 +1,4 @@
-import "react-datepicker/dist/react-datepicker.css";
-
-import { ru } from "date-fns/locale/ru";
 import { useEffect, useState } from "react";
-import { registerLocale } from "react-datepicker";
 import { useSearchParams } from "react-router-dom";
 import {
 	Button,
@@ -11,8 +7,6 @@ import {
 	Typography,
 } from "@/shared/components";
 import styles from "./SearchPanel.module.css";
-
-registerLocale("ru", ru);
 
 export const SearchPanel = ({
 	onFiltersClick,

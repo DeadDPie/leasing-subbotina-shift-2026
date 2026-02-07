@@ -24,7 +24,6 @@ type TypographyTag =
 interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
 	variant?: TypographyVariant;
 	as?: TypographyTag;
-	children: React.ReactNode;
 }
 
 const variantClasses: Record<TypographyVariant, string> = {
