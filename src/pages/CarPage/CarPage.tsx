@@ -4,7 +4,7 @@ import { useGetCarQuery } from "@/shared/api/carsApi";
 import { Button, ErrorMessage, Loading, Typography } from "@/shared/components";
 import { AppRoutes, ROUTES } from "@/shared/constants/router";
 import { getLabelFromOptions } from "@/shared/helpers/getLabelFromOptions";
-import type { CarWithRents } from "@/shared/types/car";
+import type { CarWithRents } from "@/shared/types/car/generated";
 import { getErrorMessage } from "../../shared/helpers/getErrorMessage";
 import {
 	steeringOptions,

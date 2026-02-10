@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { API_URL } from "@/shared/constants/url";
-import type { CarMedia } from "@/shared/types/car";
+import type { Media } from "@/shared/types/car/generated";
 import styles from "./CarGallery.module.css";
 
 interface CarGalleryProps {
-	media: CarMedia[];
+	media: Media[];
 }
 export const CarGallery = ({ media }: CarGalleryProps) => {
 	const cover = media.find((m) => m.isCover);

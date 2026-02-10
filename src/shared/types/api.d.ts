@@ -2754,6 +2754,11 @@ export interface operations {
 				limit?: number;
 				/** @description Номер текущей страницы (по умолчанию 1) */
 				page?: number;
+				/**
+				 * @description Расположение руля
+				 * @enum {string}
+				 */
+				steering: "left" | "right";
 			};
 			header?: never;
 			path?: never;

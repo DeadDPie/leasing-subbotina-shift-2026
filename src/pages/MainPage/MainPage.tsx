@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { type GetCarsParams, useGetCarsQuery } from "@/shared/api/carsApi";
+import { useGetCarsQuery } from "@/shared/api/carsApi";
 import { ErrorMessage, Loading } from "@/shared/components";
+
 import type {
 	BodyType,
 	Brand,
 	CarColor,
+	GetCarsParams,
 	Steering,
 	Transmission,
-} from "@/shared/types/car";
+} from "@/shared/types/car/generated";
 import { getErrorMessage } from "../../shared/helpers/getErrorMessage";
 import { CarCard } from "./components/CarCard/CarCard";
 import { CarFilters } from "./components/CarFilters/CarFilters";
